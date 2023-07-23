@@ -1,0 +1,12 @@
+server:
+  port: 8081
+spring:
+  datasource:
+    url: ${db_url}?useSSL=false&allowMultiQueries=true&serverTimezone=UTC
+    username: ${db_user}
+    password: ${db_pass}
+    driverClassName: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
