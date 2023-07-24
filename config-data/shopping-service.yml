@@ -21,7 +21,10 @@ spring:
   sql:
     init:
       mode: always
-
+eureka:
+  client:
+  serviceUrl:
+      defaultZone: http://localhost:8088/eureka/
 logging:
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
