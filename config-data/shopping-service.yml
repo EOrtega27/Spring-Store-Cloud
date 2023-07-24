@@ -23,7 +23,7 @@ spring:
       mode: always
 eureka:
   client:
-  serviceUrl:
+    serviceUrl:
       defaultZone: http://localhost:8088/eureka/
 logging:
   pattern:
