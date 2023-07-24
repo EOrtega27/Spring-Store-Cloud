@@ -1,5 +1,7 @@
 server:
   port: 8081
+  error:
+    include-message: always
 spring:
   datasource:
     url: ${db_url}?useSSL=false&allowMultiQueries=true&serverTimezone=UTC
@@ -14,3 +16,6 @@ spring:
   sql:
     init:
       mode: always
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"

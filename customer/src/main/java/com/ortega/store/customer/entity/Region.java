@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "tbl_region")
+@Table(name = "tbl_regions")
 public class Region {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
