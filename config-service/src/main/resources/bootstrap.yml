@@ -5,6 +5,7 @@ spring:
     config:
       server:
         git:
+          default-label: master
           uri: https://github.com/EOrtega27/Spring-Store-Cloud.git
           searchPaths: config-data
           username: ${GIT_USER}
