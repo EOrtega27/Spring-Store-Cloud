@@ -1,4 +1,4 @@
-package com.ortega.store.configservice;
+package com.ortega.store.config;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
