@@ -1,5 +1,6 @@
 package com.ortega.store.shopping.entity;
 
+import com.ortega.store.shopping.model.Product;
 import lombok.Data;
 
 
@@ -28,6 +29,8 @@ public class InvoiceItem {
     @Transient
     private String subTotal;
 
+    @Transient
+    private Product product;
     public Double getSubTotal(){
         if (this.price >0  && this.quantity >0 ){
             return this.quantity * this.price;

@@ -1,6 +1,7 @@
 package com.ortega.store.shopping.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.ortega.store.shopping.model.Customer;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -42,6 +43,8 @@ public class Invoice {
     @Column(name = "state")
     private String state;
 
+    @Transient
+    private Customer customer;
     public Invoice() {
         this.items = new ArrayList<>();
     }

@@ -1,12 +1,18 @@
 package com.ortega.store.shopping.service;
 
+import com.ortega.store.shopping.client.CustomerClient;
+import com.ortega.store.shopping.client.ProductClient;
 import com.ortega.store.shopping.entity.Invoice;
+import com.ortega.store.shopping.entity.InvoiceItem;
+import com.ortega.store.shopping.model.Customer;
+import com.ortega.store.shopping.model.Product;
 import com.ortega.store.shopping.repository.InvoiceItemRepository;
 import com.ortega.store.shopping.repository.InvoiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class InvoiceServiceImpl implements InvoiceService{
@@ -15,6 +21,12 @@ public class InvoiceServiceImpl implements InvoiceService{
 
     @Autowired
     InvoiceItemRepository invoiceItemsRepository;
+
+    @Autowired
+    CustomerClient customerClient;
+
+    @Autowired
+    ProductClient productClient;
 
     @Override
     public List<Invoice> findInvoiceAll() {
@@ -29,7 +41,13 @@ public class InvoiceServiceImpl implements InvoiceService{
             return  invoiceDB;
         }
         invoice.setState("CREATED");
-        return invoiceRepository.save(invoice);
+        invoiceDB = invoiceRepository.save(invoice);
+        invoiceDB.getItems().forEach(
+                invoiceItem -> {
+                    productClient.updateStockProduct( invoiceItem.getProductId(), invoiceItem.getQuantity() * -1);
+                }
+        );
+        return invoiceDB;
     }
 
 
@@ -60,6 +78,18 @@ public class InvoiceServiceImpl implements InvoiceService{
 
     @Override
     public Invoice getInvoice(Long id) {
-        return invoiceRepository.findById(id).orElse(null);
+        Invoice invoiceDB = invoiceRepository.findById(id).orElse(null);
+        if(invoiceDB != null){
+            Customer customer = customerClient.getCustomer(invoiceDB.getCustomerId()).getBody();
+            invoiceDB.setCustomer(customer);
+            //Recoge los datos de los productos usando productClient
+            List<InvoiceItem> lstItem = invoiceDB.getItems().stream().map(invoiceItem -> {
+                Product product = productClient.getProduct(invoiceItem.getProductId()).getBody();
+                invoiceItem.setProduct(product);
+                return invoiceItem;
+            }).collect(Collectors.toList());
+            invoiceDB.setItems(lstItem);
+        }
+        return invoiceDB;
     }
 }
