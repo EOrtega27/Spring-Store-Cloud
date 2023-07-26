@@ -31,6 +31,9 @@ logging:
 feign:
   hystrix:
     enable: true
+hystrix:
+  dashboard:
+    proxy-stream-allow-list: "*"
 management:
   endpoints:
     web:

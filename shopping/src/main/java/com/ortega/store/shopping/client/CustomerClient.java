@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-@FeignClient(name = "customer-service", path = "/customers")
+@FeignClient(name = "customer-service", path = "/customers", fallback = CustomerHystrixFallbackFactory.class)
 public interface CustomerClient {
     @GetMapping
     public ResponseEntity<List<Customer>> listAllCustomers(@RequestParam(name = "regionId" , required = false) Long regionId );
