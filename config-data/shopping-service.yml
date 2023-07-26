@@ -31,6 +31,10 @@ logging:
 feign:
   hystrix:
     enable: true
+  ribbon:
+    enabled: true
+  circuitbreaker:
+    enabled: true
 hystrix:
   dashboard:
     proxy-stream-allow-list: "*"
