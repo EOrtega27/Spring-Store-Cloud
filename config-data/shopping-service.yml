@@ -23,7 +23,7 @@ spring:
   boot:
     admin:
      client:
-      uri: http://localhost:8090/
+      url: http://localhost:8090/
 eureka:
   client:
     serviceUrl:

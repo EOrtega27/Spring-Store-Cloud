@@ -19,7 +19,7 @@ spring:
   boot:
     admin:
      client:
-      uri: http://localhost:8090/
+      url: http://localhost:8090/
 logging:
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
